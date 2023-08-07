@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyProfileController;
+use App\Http\Controllers\Covid19Controller;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +41,7 @@ Route::get('/greeting', function () {
     return view('greeting', compact('name', 'last_name'));
 });
 
+// week04 reused
 Route::get("/gallery", function () {
     $ant = "https://cdn3.movieweb.com/i/article/Oi0Q2edcVVhs4p1UivwyyseezFkHsq/1107:50/Ant-Man-3-Talks-Michael-Douglas-Update.jpg";
     $bird = "https://images.indianexpress.com/2021/03/falcon-anthony-mackie-1200.jpg";
@@ -95,6 +99,7 @@ Route::get('/tables', function () {
     return view('tables');
 });
 
+// week04 Quiz
 Route::get("/myprofile/create", [MyProfileController::class, "create"]);
 Route::get("/myprofile/{id}/edit", [MyProfileController::class, "edit"]);
 Route::get("/myprofile/{id}", [MyProfileController::class, "show"]);
@@ -104,3 +109,19 @@ Route::get("/newgallery", [MyProfileController::class, "gallery"]);
 Route::get("/newgallery/ant", [MyProfileController::class, "ant"]);
 Route::get("/newgallery/bird", [MyProfileController::class, "bird"]);
 Route::get("/newgallery/cat", [MyProfileController::class, "cat"]);
+
+//week05
+Route::get('/covid19', [Covid19Controller::class, "index"]);
+
+//week06
+// Route::get("/product", [ProductController::class, "index"])->name('product.index');
+// Route::get("/product/create", [ProductController::class, "create"])->name('product.create');
+// Route::post("/product", [ProductController::class, "store"])->name('product.store');
+// Route::get('/product/{id}', [ProductController::class, "show"])->name('product.show');
+// Route::get("/product/{id}/edit", [ProductController::class, "edit"])->name('product.edit');
+// Route::patch("/product/{id}", [ProductController::class, "update"])->name('product.update');
+// Route::delete("/product/{id}", [ProductController::class, "destroy"])->name('product.destroy');
+
+Route::resource('/product', ProductController::class);
+
+Route::resource('/staff', StaffController::class);
