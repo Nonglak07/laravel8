@@ -25,23 +25,41 @@
                             </div>
                         </div>
 
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>User Id</th><th>Leave Type Name</th><th>Start Date</th><th>End Date</th><th>Total Leave</th><th>Status</th><th>Comments</th><th>Approver Id</th><th>Actions</th>
+                                        <th>#</th>
+                                        <th>User Id</th>
+                                        <th>Leave Type Name</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Total Leave</th>
+                                        <th>Status</th>
+                                        <th>Comments</th>
+                                        <th>Approver Id</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($leaverequest as $item)
+                                    @foreach($leaverequest as $item)
                                     <tr>
+                                        @if(Auth()->user()->role == "admin")
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->user_id }}</td><td>{{ $item->leave_type_name }}</td><td>{{ $item->start_date }}</td><td>{{ $item->end_date }}</td><td>{{ $item->total_leave }}</td><td>{{ $item->status }}</td><td>{{ $item->comments }}</td><td>{{ $item->approver_id }}</td>
+                                        <td>{{ $item->user_id }}</td>
+                                        <td>{{ $item->leave_type_name }}</td>
+                                        <td>{{ $item->start_date }}</td>
+                                        <td>{{ $item->end_date }}</td>
+                                        <td>{{ $item->total_leave }}</td>
+                                        <td>{{ $item->status }}</td>
+                                        <td>{{ $item->comments }}</td>
+                                        <td>{{ $item->approver_id }}</td>
                                         <td>
                                             <a href="{{ url('/leave-request/' . $item->id) }}" title="View LeaveRequest"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/leave-request/' . $item->id . '/edit') }}" title="Edit LeaveRequest"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                            @endif
 
                                             <form method="POST" action="{{ url('/leave-request' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
@@ -49,8 +67,9 @@
                                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete LeaveRequest" onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                             </form>
                                         </td>
+
                                     </tr>
-                                @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                             <div class="pagination-wrapper"> {!! $leaverequest->appends(['search' => Request::get('search')])->render() !!} </div>

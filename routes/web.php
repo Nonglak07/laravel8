@@ -12,6 +12,8 @@ use App\Http\Controllers\VehicleController;  //เขียนเพิ่ม
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\QuotationDetailController;
+use App\Http\Controllers\LeaveRequestController;
+use App\Http\Controllers\LeaveTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -164,13 +166,26 @@ Route::resource('quotation-detail', 'QuotationDetailController');
 
 // week10
 Route::middleware(['auth'])->group(function () {
-Route::resource('customer', CustomerController::class);
-Route::get('quotation/{id}/pdf', [QuotationController::class, 'pdf']);
-Route::resource('quotation', QuotationController::class);
-Route::resource('quotation-detail', QuotationDetailController::class);
+    Route::resource('customer', CustomerController::class);
+    Route::get('quotation/{id}/pdf', [QuotationController::class, 'pdf']);
+    Route::resource('quotation', QuotationController::class);
+    Route::resource('quotation-detail', QuotationDetailController::class);
 });
 
 Route::resource('leave-request', 'LeaveRequestController');
 Route::resource('leave-type', 'LeaveTypeController');
 Route::resource('leave-request', 'LeaveRequestController');
 Route::resource('leave-type', 'LeaveTypeController');
+
+Route::middleware(['auth'])->group(function () {
+    Route::middleware(['role:admin,guest'])->group(function () {
+        Route::resource('leave-request', LeaveRequestController::class)->except(['edit', 'update']);
+    });
+    Route::middleware(['role:admin'])->group(function () {
+        Route::resource('leave-request', LeaveRequestController::class)->only(['edit', 'update']);
+        Route::resource('leave-type', LeaveTypeController::class);
+        Route::get("dashboard-leave", function () {
+            return view("dashboard-leave");
+        });
+    });
+});
