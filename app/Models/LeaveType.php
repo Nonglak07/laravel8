@@ -1,28 +1,33 @@
 <?php
 
-namespace DummyNamespace;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-{{useSoftDeletes}}
-class DummyClass extends Model
+
+class LeaveType extends Model
 {
     use HasFactory;
-    {{softDeletes}}/**
+    /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = '{{table}}';
+    protected $table = 'leave_types';
 
-    {{primaryKey}}
+    /**
+    * The database primary key value.
+    *
+    * @var string
+    */
+    protected $primaryKey = 'id';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = {{fillable}};
+    protected $fillable = ['leave_type_name', 'max_leave_per_year'];
 
-    {{relationships}}
+    
 }
