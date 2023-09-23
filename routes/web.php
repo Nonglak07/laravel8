@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyProfileController;
 use App\Http\Controllers\Covid19Controller;
@@ -14,6 +15,7 @@ use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\QuotationDetailController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeaveTypeController;
+use App\Http\Controllers\MovieController;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 /*
@@ -200,3 +202,22 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 });
+
+Route::resource('movie', 'MovieController');
+Route::resource('category', 'CategoryController');
+
+// week12
+Route::resource('movie', MovieController::class);
+Route::resource('category', CategoryController::class);
+Route::get("movie-livewire", function () {
+    return view("movie-livewire");
+});
+
+Route::get("counter", function () {
+    return view("counter");
+});
+
+Route::get("movie-livewire", function () {
+    return view("movie-livewire");
+});
+

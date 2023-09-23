@@ -6,19 +6,14 @@
                     <div class="card-header">User {{ $user->id }}</div>
                     <div class="card-body">
 
-                        <a href="{{ url('/user') }}" title="Back"><button class="btn btn-warning btn-sm"><i
-                                    class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <a href="{{ url('/user/' . $user->id . '/edit') }}" title="Edit User"><button
-                                class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <a href="{{ url('/user') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/user/' . $user->id . '/edit') }}" title="Edit User"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 Edit</button></a>
 
-                        <form method="POST" action="{{ url('user' . '/' . $user->id) }}" accept-charset="UTF-8"
-                            style="display:inline">
+                        <form method="POST" action="{{ url('user' . '/' . $user->id) }}" accept-charset="UTF-8" style="display:inline">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
-                            <button type="submit" class="btn btn-danger btn-sm" title="Delete User"
-                                onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o"
-                                    aria-hidden="true"></i> Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm" title="Delete User" onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                         </form>
                         <br />
                         <br />
@@ -59,7 +54,7 @@
 
                             <hr>
                             @php
-                                $vehicle = $user->vehicles()->get();
+                            $vehicle = $user->vehicles()->get();
                             @endphp
                             <h2 class="pt-4">{{ $user->name }}'s Vehicles</h2>
 
@@ -78,42 +73,34 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($vehicle as $item)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->brand }}</td>
-                                            <td>{{ $item->serie }}</td>
-                                            <td>{{ $item->color }}</td>
-                                            <td>{{ $item->year }}</td>
-                                            <td>{{ $item->mileage }}</td>
-                                            <td>{{ $item->user_id }}</td>
-                                            <td>
-                                                <a href="{{ url('/vehicle/' . $item->id) }}"
-                                                    title="View Vehicle"><button class="btn btn-info btn-sm"><i
-                                                            class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                                <a href="{{ url('/vehicle/' . $item->id . '/edit') }}"
-                                                    title="Edit Vehicle"><button class="btn btn-primary btn-sm"><i
-                                                            class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                        Edit</button></a>
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->brand }}</td>
+                                        <td>{{ $item->serie }}</td>
+                                        <td>{{ $item->color }}</td>
+                                        <td>{{ $item->year }}</td>
+                                        <td>{{ $item->mileage }}</td>
+                                        <td>{{ $item->user_id }}</td>
+                                        <td>
+                                            <a href="{{ url('/vehicle/' . $item->id) }}" title="View Vehicle"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                                            <a href="{{ url('/vehicle/' . $item->id . '/edit') }}" title="Edit Vehicle"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    Edit</button></a>
 
-                                                <form method="POST" action="{{ url('/vehicle' . '/' . $item->id) }}"
-                                                    accept-charset="UTF-8" style="display:inline">
-                                                    {{ method_field('DELETE') }}
-                                                    {{ csrf_field() }}
-                                                    <button type="submit" class="btn btn-danger btn-sm"
-                                                        title="Delete Vehicle"
-                                                        onclick="return confirm('Confirm delete?')"><i
-                                                            class="fa fa-trash-o" aria-hidden="true"></i>
-                                                        Delete</button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                            <form method="POST" action="{{ url('/vehicle' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                                {{ method_field('DELETE') }}
+                                                {{ csrf_field() }}
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Vehicle" onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>
 
                             <hr>
                             @php
-                                $post = $user->posts()->get();
+                            $post = $user->posts()->get();
                             @endphp
                             <h2 class="pt-4">{{ $user->name }}'s Posts</h2>
 
@@ -130,33 +117,25 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($post as $item)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->title }}</td>
-                                            <td>{{ $item->content }}</td>
-                                            <td>{{ $item->category }}</td>
-                                            <td>{{ $item->user_id }}</td>
-                                            <td>
-                                                <a href="{{ url('/post/' . $item->id) }}" title="View Post"><button
-                                                        class="btn btn-info btn-sm"><i class="fa fa-eye"
-                                                            aria-hidden="true"></i> View</button></a>
-                                                <a href="{{ url('/post/' . $item->id . '/edit') }}"
-                                                    title="Edit Post"><button class="btn btn-primary btn-sm"><i
-                                                            class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                        Edit</button></a>
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->title }}</td>
+                                        <td>{{ $item->content }}</td>
+                                        <td>{{ $item->category }}</td>
+                                        <td>{{ $item->user_id }}</td>
+                                        <td>
+                                            <a href="{{ url('/post/' . $item->id) }}" title="View Post"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                                            <a href="{{ url('/post/' . $item->id . '/edit') }}" title="Edit Post"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    Edit</button></a>
 
-                                                <form method="POST" action="{{ url('/post' . '/' . $item->id) }}"
-                                                    accept-charset="UTF-8" style="display:inline">
-                                                    {{ method_field('DELETE') }}
-                                                    {{ csrf_field() }}
-                                                    <button type="submit" class="btn btn-danger btn-sm"
-                                                        title="Delete Post"
-                                                        onclick="return confirm('Confirm delete?')"><i
-                                                            class="fa fa-trash-o" aria-hidden="true"></i>
-                                                        Delete</button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                            <form method="POST" action="{{ url('/post' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                                {{ method_field('DELETE') }}
+                                                {{ csrf_field() }}
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Post" onclick="return confirm('Confirm delete?')"><i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>
